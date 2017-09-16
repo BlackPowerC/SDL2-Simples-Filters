@@ -15,10 +15,34 @@
 
 #endif // SDL_BYTEORDER
 
+#ifndef M_PI
+    #define M_PI	3.14159265358979323846
+#endif // M_PI
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif // __cplusplus
+
+    // Struct: Point
+    // Synopsis: une structure definissant un point
+    // param:
+    // - x, abscisse du point
+    // - y, ordonnée du point
+    typedef struct Point Point ;
+    struct Point
+    {
+        int x ;
+        int y ;
+    }  ;
+
+    typedef struct Color Color ;
+    struct Color
+    {
+        Uint8 r ;
+        Uint8 g ;
+        Uint8 b ;
+    } ;
 
     // Fonction: error
     // Synopsis: fonction vérifiant si un pointeur vaut NULL (nullptr) ou pas
@@ -31,13 +55,13 @@ extern "C"
     // Synopsis: fonction permettant la rotation de l'image vers la droite de 180°
     // parm:
     // - *src, pointeur sur la surface à traite
-    void LeftRotate(SDL_Surface *src) ;
+    SDL_Surface *LeftRotate(SDL_Surface *src) ;
 
     // Fonction: UpRotate
     // Synopsis: fonction permettant la rotation de l'image vers le bas de 180°
     // parm:
     // - *src, pointeur sur la surface à traiter
-    void UpRotate(SDL_Surface *src) ;
+    SDL_Surface *UpRotate(SDL_Surface *src) ;
 
     // Fonction: greyLevel
     // Synopsis: fonction permettant la mise en niveau de gris d'une image
@@ -49,7 +73,7 @@ extern "C"
     // Synopsis: fonction permettant l'inversion de couleur sur une image
     // parm:
     // - *src, pointeur sur la surface à traiter
-    void inversion(SDL_Surface *src) ;
+    SDL_Surface *inversion(SDL_Surface *src) ;
 
     // Fonction: luminositeMouse
     // Synopsis: fonction permettant de modifier la luminosité d'un image en un point avec la souris
@@ -83,7 +107,7 @@ extern "C"
     // - _g, quantité de vert à ajouter ou à enlever
     // - _r, quantité de rouge à ajouter ou à enlever
     // - _b, quantité de bleu à ajouter ou à enlever
-    void RGB(SDL_Surface *src, int _r, int _g, int _b) ;
+    void balancement_de_couleur(SDL_Surface *src, int _r, int _g, int _b) ;
 
     // Fonction: luminositeMouse
     // Synopsis: fonction permettant de modifier la luminosité d'un image en un point avec la souris
@@ -104,6 +128,18 @@ extern "C"
     // - _r, quantité de rouge à ajouter ou à enlever
     // - _b, quantité de bleu à ajouter ou à enlever
     void RGB_Mouse(SDL_Surface *src, int x, int y, int _r, int _g, int _b) ;
+
+    SDL_Surface *gaussBlur(SDL_Surface *src, Uint8 gauss) ;
+
+    SDL_Surface *contraste(SDL_Surface *src, Uint8 seed) ;
+
+    SDL_Surface *filtre(SDL_Surface *src) ;
+
+    SDL_Surface *sepia(SDL_Surface *src) ;
+
+    SDL_Surface *binarisation(SDL_Surface *src) ;
+
+    int *Histogramme(SDL_Surface *src) ;
 
 #ifdef __cplusplus
 }
